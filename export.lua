@@ -51,7 +51,7 @@ function importProject(self, prjName, baseCriteria)
 		solution = p.global.getSolution(slnName)
 		prjName = prjName:sub(separatorPos + 1)
 		if not solution then
-			error("Solution "..slnName.." does not exists")
+			error("Solution "..slnName.." does not exists", 0)
 		end
 	else
 		solution = self.solution
@@ -68,7 +68,7 @@ function importProject(self, prjName, baseCriteria)
 	-- Find the project
 	local project = p.solution.findproject(solution, prjName)
 	if not project then
-		error("Project "..prjName.." is not in the solution "..solution.name)
+		error("Project "..prjName.." is not in the solution "..solution.name, 0)
 	end
 
 	for _, exportScope in ipairs(project.exports) do
