@@ -3,6 +3,9 @@
 --		Author : Bastien Brunnenstein
 --
 
+local p = premake
+
+
 function virtualproject(name)
 	project(name)
 	p.api.scope.project.virtual = true
