@@ -58,6 +58,9 @@ project "CC"
   defines "I_AM_CC"
 ```
 
+## Tokens
+If your export blocks include tokens, they will be expanded by the importing project, which will probably result in unexpected behaviours.
+
 ## Virtual projects
 The virtualproject.lua extension add a `virtualproject` function, you can use it to create projects that are never included in the solution.
 
