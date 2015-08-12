@@ -82,7 +82,6 @@ function importProject(self, prjName, filters, baseCriteria)
 		and  matchFilters(exp.name, filters) then
 
 			table.insert(parsed, exp.name)
-	print ("  "..prjName.." : "..exp.name)
 
 			for _, expBlock in ipairs(exp.blocks) do
 				-- Copy each block and append the criteria patterns
@@ -105,8 +104,6 @@ function importProject(self, prjName, filters, baseCriteria)
 end
 
 premake.override(p.project, "bake", function(base, self)
-
-print("For "..self.name.." import :")
 
 	-- Store parsed imports to prevent infinite loops
 	self.parsedImports = {}
