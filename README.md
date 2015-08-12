@@ -57,3 +57,8 @@ project "CC"
 
   defines "I_AM_CC"
 ```
+
+## Virtual projects
+The virtualproject.lua extension add a `virtualproject` function, you can use it to create projects that are never included in the solution.
+
+It can be useful to create "fake" projects that only contains export blocks. You should never try to link against such projects as the solution will look for non-existing projects.
