@@ -15,6 +15,21 @@ end
 
 
 
+-- Copy a block, only deep-copying the criteria
+local function copyBlock(object)
+  local clone = {}
+
+  for k, v in pairs(object) do
+    if k == "_criteria" then
+      clone[k] = table.deepcopy(v)
+    else
+      clone[k] = v
+    end
+  end
+
+  return clone
+end
+
 local function cleanBlock(block)
   -- The blocks may have invalid infos reserved for the first ones
   if block.filename then
@@ -84,8 +99,9 @@ function importProject(self, prjName, filters, baseCriteria)
       table.insert(parsed, exp.name)
 
       for _, expBlock in ipairs(exp.blocks) do
+
         -- Copy each block and append the criteria patterns
-        local newBlock = table.deepcopy(expBlock)
+        local newBlock = copyBlock(expBlock)
 
         newBlock._criteria.patterns = table.join(newBlock._criteria.patterns, baseCriteria.patterns)
         newBlock._criteria.data = p.criteria._compile(newBlock._criteria.patterns)
