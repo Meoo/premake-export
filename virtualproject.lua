@@ -5,11 +5,11 @@
 
 local p = premake
 
-
-function virtualproject(name)
-  project(name)
-  p.api.scope.project.virtual = true
-end
+p.api.register {
+  name = "virtualproject",
+  scope = { "project" },
+  kind = "boolean",
+}
 
 premake.override(p.main, "postBake", function(base)
   print "Removing virtual projects..."
@@ -19,7 +19,7 @@ premake.override(p.main, "postBake", function(base)
     local toRemove = {}
 
     for k, v in ipairs(sln.projects) do
-      if v.virtual then
+      if v.virtualproject == true then
         table.insert(toRemove, k)
         virtualProjects[v.name] = v
       end
